@@ -1,0 +1,266 @@
+﻿overviewText = "Intruders";
+overviewTextLocked = "Escape from Insanity";
+overviewPicture = "\intruders_mod\ui\background.jpg";
+
+onLoadName = "Intruders";
+onLoadMission = "Escape from Insanity";
+loadScreen = "\intruders_mod\ui\background.jpg";
+author = "Gonzka";
+
+unsafeCVL = 1;
+briefing = 0;
+disableChannels[] = {
+	{0, false, true}, //--- Global Chat
+	{1, true, true}, //--- Side Chat
+	{2, true, true}, //--- Command Chat
+	{3, true, true}, //--- Group Chat
+	{4, true, true}, //--- Vehicle Chat
+	{5, false, false}, //--- Direct Chat
+	{6, true, true} //--- System Chat
+};
+
+ReviveMode = 2;
+ReviveUnconsciousStateMode = 0;
+ReviveRequiredTrait = 0;
+ReviveRequiredItems = 0;
+ReviveRequiredItemsFakConsumed = 0;
+ReviveDelay = 8;
+ReviveMedicSpeedMultiplier = 2;
+ReviveForceRespawnDelay = 3;
+ReviveBleedOutDelay = 120;
+
+#include "config\Config_Master.hpp"
+
+class cfgFunctions {
+	#include "Functions.hpp"
+};
+
+#include "defines.hpp"
+#include "scripts\mainmenu\menuprinc.hpp"
+#include "scripts\quests\questTerminal.hpp"
+#include "scripts\shop\redeemCode.hpp"
+#include "scripts\shop\shopMenu.hpp"
+#include "scripts\perkmenu\perkMenu.hpp"
+#include "scripts\clothing\clothing.hpp"
+#include "scripts\killer\selectKillerMenu.hpp"
+
+class RscTitles {
+	#include "scripts\functions\notification.hpp"
+	#include "scripts\wheelmenu\wheelmenu.hpp"
+	#include "scripts\functions\statusbar.hpp"
+	#include "scripts\lockpicking\hud_default.hpp"
+	#include "scripts\lockpicking\hud_lockpick.hpp"
+	#include "scripts\generator\skillCheckMenu.hpp"
+	#include "scripts\endgame\timer.hpp"
+};
+
+class CfgSFX {
+	class powergenerator {
+		sound0[] = {"@a3\missions_f_tank\data\sounds\powergenerator.wss", db+10, 1.0, 50, 1, 0, 0, 0};
+		sound1[] = {"@a3\missions_f_tank\data\sounds\powergenerator2.wss", db+10, 1.0, 50, 1, 0, 0, 0};
+		sounds[] = {sound0, sound1};
+		empty[] = {"", 0, 0, 0, 0, 0, 0, 0};
+	};
+};
+
+class CfgVehicles {
+	class powergenerator {
+		sound = "powergenerator";
+	};
+};
+
+class CfgDebriefing {
+	class KillerWin {
+		title = "$STR_BRIEF_GameOver";
+		subtitle = "$STR_BRIEF_KillerWin";
+		description = "";
+		pictureBackground = "\intruders_mod\ui\background.jpg";
+		picture = "";
+		pictureColor[] = {1.0,1.0,1.0,1};
+	};
+	
+	class IntrudersWin {
+		title = "$STR_BRIEF_GameOver";
+		subtitle = "$STR_BRIEF_IntrudersWin";
+		description = "";
+		pictureBackground = "\intruders_mod\ui\background.jpg";
+		picture = "";
+		pictureColor[] = {1.0,1.0,1.0,1};
+	};
+	
+	class KillerLeft {
+		title = "$STR_BRIEF_GameOver";
+		subtitle = "$STR_BRIEF_KillerLeft";
+		description = "";
+		pictureBackground = "\intruders_mod\ui\background.jpg";
+		picture = "";
+		pictureColor[] = {1.0,1.0,1.0,1};
+	};
+	
+	class LeaveMenuPrinc {
+		title = "$STR_BRIEF_Goodbye";
+		subtitle = "$STR_BRIEF_LobbyReturn";
+		description = "<t align='center' size='1.1' font='PuristaMedium'>See you soon!</t><br/>";
+		pictureBackground = "\intruders_mod\ui\background.jpg";
+		picture = "";
+		pictureColor[] = {1.0,1.0,1.0,1};
+	};
+	
+	class Dead {
+		title = "$STR_BRIEF_Dead";
+		subTitle = "$STR_BRIEF_AlreadyDied";
+		description = "";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {1.0,1.0,1.0,1};
+	};
+};
+
+class CfgHints {
+	class Intruders {
+		displayName = "Intruders";
+		
+		class wendigo {
+			displayName = "$STR_HINT_WendigoAbility";
+			description = "$STR_HINT_WendigoAbilityDesc";
+			tip = "";
+			arguments[] = {};
+			image = "\intruders_mod\textures\abilities\ico_abilityWendigo.paa";
+		};
+		
+		class buckethead {
+			displayName = "$STR_HINT_BucketheadAbility";
+			description = "$STR_HINT_BucketheadAbilityDesc";
+			tip = "";
+			arguments[] = {};
+			image = "\intruders_mod\textures\abilities\ico_abilityBuckethead.paa";
+		};
+		
+		class trapper {
+			displayName = "$STR_HINT_TrapperAbility";
+			description = "$STR_HINT_TrapperAbilityDesc";
+			tip = "";
+			arguments[] = {};
+			image = "\intruders_mod\textures\abilities\ico_abilityTrapper.paa";
+		};
+	
+		class flashbang {
+			displayName = "$STR_ITEM_Flashbang";
+			description = "$STR_ITEM_FlashbangDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_flashbang.paa";
+		};
+		
+		class firstAidKit {
+			displayName = "$STR_ITEM_FirstAidKit";
+			description = "$STR_ITEM_FirstAidKitDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_firstAidKit.paa";
+		};
+		
+		class toolbox {
+			displayName = "$STR_ITEM_Toolbox";
+			description = "$STR_ITEM_ToolboxDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_toolbox.paa";
+		};
+		
+		class smokeBomb {
+			displayName = "$STR_ITEM_SmokeBomb";
+			description = "$STR_ITEM_SmokeBombDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_smokeBomb.paa";
+		};
+		
+		class circuit {
+			displayName = "$STR_ITEM_Circuit";
+			description = "$STR_ITEM_CircuitDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_circuit.paa";
+		};
+		
+		class rifle {
+			displayName = "$STR_ITEM_Rifle";
+			description = "$STR_ITEM_RifleDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_rifle.paa";
+		};
+		
+		class vitalCapsule {
+			displayName = "$STR_ITEM_VitalCapsule";
+			description = "$STR_ITEM_VitalCapsuleDesc";
+			tip = "";
+			arguments[] = {};
+			image = "textures\ico_vitalCapsule.paa";
+		};
+		
+		class firecrackers {
+			displayName = "$STR_ITEM_Firecrackers";
+			description = "$STR_ITEM_FirecrackersDesc";
+			tip = "$STR_ITEM_FirecrackersLore";
+			arguments[] = {};
+			image = "textures\ico_firecrackers.paa";
+		};
+	};
+};
+
+class CfgWorlds {
+	class Tanoa {
+		author = "Affiger_Affe";
+		description = "$STR_TANOA_Map";
+		pictureMap = "\intruders_mod\textures\tanoa\tanoa.jpg";
+
+		loadingTexts[] = {
+			"$STR_LOADING_1",
+			"$STR_LOADING_2",
+			"$STR_LOADING_3",
+			"$STR_LOADING_4",
+			"$STR_LOADING_5",
+			"$STR_LOADING_6",
+			"$STR_LOADING_7",
+			"$STR_LOADING_8"
+		};
+	};
+	
+	class Malden {
+		author = "Affiger_Affe";
+		description = "$STR_MALDEN_Map";
+		pictureMap = "\intruders_mod\textures\malden\malden.jpg";
+
+		loadingTexts[] = {
+			"$STR_LOADING_1",
+			"$STR_LOADING_2",
+			"$STR_LOADING_3",
+			"$STR_LOADING_4",
+			"$STR_LOADING_5",
+			"$STR_LOADING_6",
+			"$STR_LOADING_7",
+			"$STR_LOADING_8",
+			"$STR_LOADING_9"
+		};
+	};
+	
+	class Altis {
+		author = "Gonzka";
+		description = "$STR_ALTIS_Map";
+		pictureMap = "\intruders_mod\textures\altis\altis.jpg";
+
+		loadingTexts[] = {
+			"$STR_LOADING_1",
+			"$STR_LOADING_2",
+			"$STR_LOADING_3",
+			"$STR_LOADING_4",
+			"$STR_LOADING_5",
+			"$STR_LOADING_6",
+			"$STR_LOADING_7",
+			"$STR_LOADING_8",
+			"$STR_LOADING_9"
+		};
+	};
+};
