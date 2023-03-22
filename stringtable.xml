@@ -104,7 +104,7 @@
 			<German>Warte auf einen Überlebenden</German>
 		</Key>
 		<Key ID="STR_INIT_ReadyWaiting">
-			<Original>Wait for all players to be ready</Original>
+			<Original>Waiting for all players to be ready</Original>
 			<German>Warte bis alle Spieler bereit sind</German>
 		</Key>
 	</Package>
